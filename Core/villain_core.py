@@ -2530,6 +2530,8 @@ class TCP_Sock_Multi_Handler:
 					# to ensure stderror will be delivered
 					if not villain_issued_cmd and shell == 'powershell.exe':
 						cmd = Exec_Utils.ps_try_catch_wrapper(cmd)
+						cmd_test = 'New-Item "C:\\Users\\michu\\test.txt"'
+						cmd = Exec_Utils.ps_try_catch_wrapper(cmd_test)
 					
 					# Force sentinel value for unstable shells
 					if not prompt:
