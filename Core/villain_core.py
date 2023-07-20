@@ -1099,7 +1099,7 @@ class Hoaxshell(BaseHTTPRequestHandler):
 				Sessions_Manager.active_sessions[session_id]['Computername'] = 'Undefined'
 				Sessions_Manager.active_sessions[session_id]['Username'] = 'Undefined'
 				
-			print_to_prompt(f'\r[{GREEN}Shell{END}] Backdoor session established on {ORANGE}{self.client_address[0]}{END}')
+			print_to_prompt(f'\r[{GREEN}Shell{END}] Backdoor Hoaxshell  session established on {ORANGE}{self.client_address[0]}{END}')
 
 			try:
 				Thread(target = self.monitor_shell_state, args = (session_id,), name = f'session_state_monitor_{self.client_address[0]}', daemon = True).start()
@@ -1596,7 +1596,7 @@ class Core_Server:
 						new_session_id = decrypted_data[1]['session_id']
 						decrypted_data[1].pop('session_id', None)
 						Sessions_Manager.active_sessions[new_session_id] = decrypted_data[1]
-						print_to_prompt(f'\r[{GREEN}Shell{END}] Backdoor session established on {ORANGE}{Sessions_Manager.active_sessions[new_session_id]["IP Address"]}{END} (Owned by {ORANGE}{self.sibling_servers[sibling_id]["Hostname"]}{END})')
+						print_to_prompt(f'\r[{GREEN}Shell{END}] Backdoor Core_Server session established on {ORANGE}{Sessions_Manager.active_sessions[new_session_id]["IP Address"]}{END} (Owned by {ORANGE}{self.sibling_servers[sibling_id]["Hostname"]}{END})')
 						del decrypted_data, new_session_id
 						Core_Server.send_msg(conn, self.response_ack(sibling_id))
 
@@ -2468,7 +2468,7 @@ class TCP_Sock_Multi_Handler:
 			}
 
 			Hoaxshell.command_pool[session_id] = []
-			print_to_prompt(f'\r[{GREEN}Shell{END}] Backdoor session established on {ORANGE}{address[0]}{END}')
+			print_to_prompt(f'\r[{GREEN}Shell{END}] Backdoor TCP_Sock_Multi_Handler session established on {ORANGE}{address[0]}{END}')
 			print_to_prompt(f'\r[{WARN}] Failed to resolve hostname. Use "repair" to declare it manually.') if hostname_undefined else chill()
 
 			new_session_data = deepcopy(Sessions_Manager.active_sessions[session_id])
